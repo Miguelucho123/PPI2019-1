@@ -3,8 +3,11 @@ package interfaz;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.*;
+
+import util.ConexionBD;
 
 public class Vistas extends JFrame implements ActionListener {
 
@@ -15,7 +18,7 @@ public class Vistas extends JFrame implements ActionListener {
 	// opciones del menu superior
 	private JMenu menuArchivo, menuRecorrido, menuSalir;
 	// opciones del apartado archivo
-	private JMenuItem archivoAgregarDato, archivoEliminarDato, archivoExportar, archivoPoblarBD;
+	private JMenuItem archivoAgregarDato, archivoEliminarDato, archivoExportar, archivoPoblarBD, archivoEstablecerRaiz;
 	// opciones del apartado recorridos
 	private JMenuItem recorridoINORDEN, recorridoPOSORDEN, recorridoPREORDEN;
 	// titulo principal
@@ -55,7 +58,8 @@ public class Vistas extends JFrame implements ActionListener {
 		archivoAgregarDato = new JMenuItem();
 		archivoEliminarDato = new JMenuItem();
 		archivoExportar = new JMenuItem();
-		archivoPoblarBD = new  JMenuItem();
+		archivoPoblarBD = new JMenuItem();
+		archivoEstablecerRaiz = new JMenuItem();
 
 		recorridoINORDEN = new JMenuItem();
 		recorridoPOSORDEN = new JMenuItem();
@@ -91,6 +95,10 @@ public class Vistas extends JFrame implements ActionListener {
 
 		// Crear items del menu archivo
 
+		archivoEstablecerRaiz.setText("Establecer Raíz");
+		menuArchivo.add(archivoEstablecerRaiz);
+		menuArchivo.addSeparator();
+
 		archivoAgregarDato.setText("Agregar dato");
 		menuArchivo.add(archivoAgregarDato);
 		menuArchivo.addSeparator();
@@ -98,7 +106,7 @@ public class Vistas extends JFrame implements ActionListener {
 		archivoEliminarDato.setText("EliminarDato");
 		menuArchivo.add(archivoEliminarDato);
 		menuArchivo.addSeparator();
-		
+
 		archivoPoblarBD.setText("Poblar BD");
 		menuArchivo.add(archivoPoblarBD);
 		menuArchivo.addSeparator();
@@ -133,6 +141,8 @@ public class Vistas extends JFrame implements ActionListener {
 
 		archivoAgregarDato.addActionListener(this);
 		archivoEliminarDato.addActionListener(this);
+		archivoEstablecerRaiz.addActionListener(this);
+		archivoPoblarBD.addActionListener(this);
 		archivoExportar.addActionListener(this);
 
 		recorridoINORDEN.addActionListener(this);
@@ -158,7 +168,16 @@ public class Vistas extends JFrame implements ActionListener {
 	}
 
 	private void eventosMenuArchivo(ActionEvent e) {
-		if (e.getSource() == archivoAgregarDato) {
+		if (e.getSource() == archivoEstablecerRaiz) {
+			ConexionBD con = new ConexionBD();
+			try {
+				con.establecerRaiz();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+		} else if (e.getSource() == archivoAgregarDato) {
 			if (lblEliminarDato.isVisible()) {
 				lblEliminarDato.setVisible(false);
 				lblAgregarDato.setVisible(true);
@@ -168,16 +187,31 @@ public class Vistas extends JFrame implements ActionListener {
 			String respuesta = JOptionPane.showInputDialog("dato a insertar");
 
 			lblMostrarDatoAgg.setText(respuesta);
+			ConexionBD con = new ConexionBD();
+			try {
+				con.agregarDato(respuesta);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 
-		}else if(e.getSource()== archivoPoblarBD){
-			
+		} else if (e.getSource() == archivoPoblarBD) {
+
 			String numeroRegistros = JOptionPane.showInputDialog("NUMERO DE REGISTROS PARA POBLAR LA BD");
-			
-			
-		}else if (e.getSource() == archivoEliminarDato) {
-		
-			if (lblAgregarDato.isVisible()) {
+			ConexionBD con = new ConexionBD();
+
+			try {
+				con.poblarBD(numeroRegistros);
+			} catch (SQLException e1) {
+
+				e1.printStackTrace();
+			}
+
+		} else if (e.getSource() == archivoEliminarDato) {
+
+			if (lblAgregarDato.isVisible() && lblMostrarDatoAgg.isVisible()) {
 				lblAgregarDato.setVisible(false);
+				lblMostrarDatoAgg.setVisible(false);
 
 			}
 			miPanel.add(lblEliminarDato);
@@ -185,6 +219,13 @@ public class Vistas extends JFrame implements ActionListener {
 			String respuesta = JOptionPane.showInputDialog("dato a borrar");
 
 			lblMostrarDatoElim.setText(respuesta);
+			ConexionBD con=new ConexionBD();
+			try {
+				con.borrarDato(respuesta);
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+			
 
 		} else if (e.getSource() == archivoExportar) {
 			System.out.println("exportar");
