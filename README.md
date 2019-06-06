@@ -9,9 +9,9 @@ _Estas instrucciones te permitirán obtener una copia del proyecto en funcionami
 
 ### Pre-requisitos 📋
 
-*Se necesita git, esto para versionar el proyecto
-*Se necesita un IDE, el proyecto base esta en Eclipse
-*Se necesita XAMMP para levantar el servidor de MySQL
+* Se necesita git, esto para versionar el proyecto
+* Se necesita un IDE, el proyecto base esta en Eclipse
+* Se necesita XAMMP para levantar el servidor de MySQL
 
 
 ### Instalación 🔧
@@ -36,7 +36,7 @@ _Para instalar la BD se importa desde el phpmyadmin, esta página se configura d
 
 ## Autores ✒️
 
-_Menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inicios_
+
 
 * **Miguel Ángel Gutiérrez Echeverri** 
 * **Estefanía Congote**
