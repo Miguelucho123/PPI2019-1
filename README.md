@@ -9,9 +9,9 @@ _Estas instrucciones te permitirán obtener una copia del proyecto en funcionami
 
 ### Pre-requisitos 📋
 
-_Se necesita git, esto para versionar el proyecto_
-_Se necesita un IDE, el proyecto base esta en Eclipse_
-_Se necesita XAMMP para levantar el servidor de MySQL_
+*Se necesita git, esto para versionar el proyecto
+*Se necesita un IDE, el proyecto base esta en Eclipse
+*Se necesita XAMMP para levantar el servidor de MySQL
 
 
 ### Instalación 🔧
@@ -53,4 +53,4 @@ _Menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inicios
 
 ---
 _Plantilla creada por_
-⌨️ con ❤️ por [Villanuevand](https://github.com/Villanuevand) 😊
+[Villanuevand](https://github.com/Villanuevand) 😊
