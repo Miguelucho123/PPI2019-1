@@ -1,8 +1,56 @@
 # PPI2019-1
-En este repositorio estará el proyecto de arboles binarios con organización AVL a base de una BD.
+
+_Este es el proyecto pedagógico integrador 2019-1, proyecto que partiendo de unos datos alojados en una BD permite organizarlos por medio de un Árbol AVL, también permite ingresar y eliminar un dato como exportar un resultado a un archivo plano._
+
+## Comenzando 🚀
+
+_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
 
 
-Para correr este programa se necesita
-XAMPP: para poder cargar el servidor MySQL.
-Eclipse: para abrir el proyecto.
-GIT: para poder subir los cambios.
+### Pre-requisitos 📋
+
+_Se necesita git, esto para versionar el proyecto_
+_Se necesita un IDE, el proyecto base esta en Eclipse_
+_Se necesita XAMMP para levantar el servidor de MySQL_
+
+
+### Instalación 🔧
+
+_Para clonar el proyecto usamos el comando_
+```
+git clone https://github.com/Miguelucho123/PPI2019-1.git
+```
+_Para mirar que archivos modificaste usas el comando:_
+```
+git status
+```
+_Y ya el proceso para subirlo al repositorio se hace con estas series de comandos(subir cambios cada vez que se sepa que esta correcto lo que se cambió_
+```
+git add .
+git commit -m "nombre del commit"
+git push
+```
+
+_Para instalar la BD se importa desde el phpmyadmin, esta página se configura desde el xampp levantando el sevidor apache y mySQL_
+
+
+## Autores ✒️
+
+_Menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inicios_
+
+* **Miguel Ángel Gutiérrez Echeverri** 
+* **Estefanía Congote**
+* **Sebastían Arismendy**
+
+## Expresiones de Gratitud 🎁
+
+* Comenta a otros sobre este proyecto 📢
+* Invita una cerveza 🍺 a alguien del equipo. 
+* Da las gracias públicamente 🤓.
+
+
+
+
+---
+_Plantilla creada por_
+⌨️ con ❤️ por [Villanuevand](https://github.com/Villanuevand) 😊
