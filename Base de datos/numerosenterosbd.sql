@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generaciÛn: 06-06-2019 a las 05:01:45
--- VersiÛn del servidor: 10.1.40-MariaDB
--- VersiÛn de PHP: 7.3.5
+-- Tiempo de generaci√≥n: 06-06-2019 a las 05:08:35
+-- Versi√≥n del servidor: 10.1.40-MariaDB
+-- Versi√≥n de PHP: 7.3.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -16,13 +16,11 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES latin2 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Base de datos: `numerosenterosbd`
 --
-CREATE DATABASE IF NOT EXISTS `numerosenterosbd` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
-USE `numerosenterosbd`;
 
 -- --------------------------------------------------------
 
@@ -30,7 +28,6 @@ USE `numerosenterosbd`;
 -- Estructura de tabla para la tabla `negativos`
 --
 
-DROP TABLE IF EXISTS `negativos`;
 CREATE TABLE `negativos` (
   `num_negativos` bigint(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
@@ -50,7 +47,6 @@ INSERT INTO `negativos` (`num_negativos`) VALUES
 -- Estructura de tabla para la tabla `neutros`
 --
 
-DROP TABLE IF EXISTS `neutros`;
 CREATE TABLE `neutros` (
   `num_neutro` bigint(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
@@ -68,7 +64,6 @@ INSERT INTO `neutros` (`num_neutro`) VALUES
 -- Estructura de tabla para la tabla `positivos`
 --
 
-DROP TABLE IF EXISTS `positivos`;
 CREATE TABLE `positivos` (
   `num_positivos` bigint(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
@@ -83,7 +78,7 @@ INSERT INTO `positivos` (`num_positivos`) VALUES
 (1);
 
 --
--- Õndices para tablas volcadas
+-- √çndices para tablas volcadas
 --
 
 --
