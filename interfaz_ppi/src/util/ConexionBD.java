@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Random;
 
 import javax.swing.JOptionPane;
 
@@ -63,43 +62,30 @@ public class ConexionBD {
 
 	}
 
-	public void agregarDato(String dato) throws SQLException {
-		int datoNum = Integer.parseInt(dato);
-		Statement ejecutor = conexion.createStatement();
-		if (datoNum > 0) {
-			String query = "INSERT INTO positivos (num_positivos) VALUES(" + datoNum + ")";
-			ejecutor.executeUpdate(query);
-		} else {
-			String queryNegativos = "INSERT INTO negativos (num_negativos) VALUES(" + datoNum + ")";
-			ejecutor.executeUpdate(queryNegativos);
-		}
+	public void agregarPersona(String strCedula, String nombre, String strEdad) throws SQLException {
+		int cedula = Integer.valueOf(strCedula);
+		int edad = Integer.valueOf(strEdad);
 
-		JOptionPane.showMessageDialog(null, "Se agregó correctamente el dato");
+		Statement ejecutor = conexion.createStatement();
+
+		String query = "INSERT INTO `personas`(`CEDULA`, `NOMBRE`, `EDAD`) VALUES (" + cedula + ",'" + nombre + "',"
+				+ edad + ")";
+		ejecutor.executeUpdate(query);
+
+		JOptionPane.showMessageDialog(null, "Se registró correctamente");
 		desconectar();
 
 	}
 
-	public void borrarDato(String dato) throws SQLException {
-		int datoNum = Integer.parseInt(dato);
+	public void borrarPersona(String strCedula) throws SQLException {
+		int cedula = Integer.valueOf(strCedula);
+
 		Statement ejecutor = conexion.createStatement();
-		if (datoNum > 0) {
-			String query = "DELETE FROM positivos WHERE num_positivos ='" + datoNum + "'";
-			ejecutor.executeUpdate(query);
-		} else {
-			String queryNegativos = "DELETE FROM negativos WHERE num_negativos ='" + datoNum + "'";
-			ejecutor.executeUpdate(queryNegativos);
-		}
+
+		String query = "DELETE FROM `personas` WHERE  CEDULA='" + cedula + "'";
+		ejecutor.executeUpdate(query);
 
 		JOptionPane.showMessageDialog(null, "Se borró correctamente el dato");
-		desconectar();
-	}
-
-	public void ejecutarQueryCreacion(int cedula, String nombre, int edad) throws SQLException {
-		Statement poblar = conexion.createStatement();
-		String queryPositivos = "INSERT INTO `personas`(`CEDULA`, `NOMBRE`, `EDAD`) VALUES (" + cedula + ",'" + nombre
-				+ "'," + edad + ")";
-		System.out.println(queryPositivos);
-		poblar.executeUpdate(queryPositivos);
 		desconectar();
 	}
 

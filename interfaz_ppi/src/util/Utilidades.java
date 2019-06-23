@@ -52,14 +52,5 @@ public class Utilidades {
 		return edadesAleatorias;
 	}
 
-	public static void imprimir(int[] nombresGenerados) {
-		for (int i = 0; i < nombresGenerados.length; i++) {
-			System.out.println(nombresGenerados[i]);
-		}
-	}
-
-	public static void main(String[] args) {
-		imprimir(generarEdadesAleatorias("5"));
-	}
 
 }

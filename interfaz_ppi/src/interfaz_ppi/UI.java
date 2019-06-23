@@ -79,18 +79,29 @@ public class UI extends JFrame implements ActionListener {
 					JOptionPane.QUESTION_MESSAGE);
 			String edad = JOptionPane.showInputDialog(registrarUsuario, "Ingresa edad", JOptionPane.QUESTION_MESSAGE);
 
-			// ACA VA EL METODO PARA REGISTRAR
-			resultado.setText("El usuario que se registró fue la cedula: " + cedula + "\nCon el nombre: " + nombre
-					+ "\nCon la edad: " + edad);
+			ConexionBD aggDato = new ConexionBD();
+			try {
+				aggDato.agregarPersona(cedula, nombre, edad);
+				resultado.setText("El usuario que se registró fue la cedula: " + cedula + "\nCon el nombre: " + nombre
+						+ "\nCon la edad: " + edad);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 
 		}
 		if (e.getSource() == eliminarUsuario) {
 			String cedulaAEliminar = JOptionPane.showInputDialog(eliminarUsuario, "Ingresa Cedula para eliminar",
 					JOptionPane.QUESTION_MESSAGE);
 
-			// ACA VA EL METODO PARA ELIMINAR
-
-			resultado.setText("El usuario con cedula " + cedulaAEliminar + "ah sido eliminado");
+			ConexionBD elimDato = new ConexionBD();
+			try {
+				elimDato.borrarPersona(cedulaAEliminar);
+				resultado.setText("El usuario con cedula " + cedulaAEliminar + "ah sido eliminado");
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 
 		}
 		if (e.getSource() == poblarBD) {
@@ -105,8 +116,6 @@ public class UI extends JFrame implements ActionListener {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-
-			
 
 		}
 		if (e.getSource() == inorden) {
