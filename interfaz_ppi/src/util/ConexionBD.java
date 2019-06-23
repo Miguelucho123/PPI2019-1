@@ -15,7 +15,7 @@ public class ConexionBD {
 	private static final String driver = "com.mysql.jdbc.Driver";
 	private static final String user = "root";
 	private static final String password = "";
-	private static final String url = "jdbc:mysql://localhost:3306/numerosenterosbd";
+	private static final String url = "jdbc:mysql://localhost:3306/personalbd";
 	private ResultSet rs;
 	private Statement st;
 
@@ -43,50 +43,24 @@ public class ConexionBD {
 		}
 	}
 
-	public void establecerRaiz() throws SQLException {
-		int neutro = 0;
-
-		Statement s1 = conexion.createStatement();
-		String queryConsulta = "SELECT * FROM neutros";
-		rs = s1.executeQuery(queryConsulta);
-		if (rs.next()) {
-			System.out.println("Ya hay dato neutro en la BD");
-
-			System.out.println("Dato: " + rs.getString(1));
-
-		} else {
-			st = conexion.createStatement();
-
-			String query = "INSERT INTO neutros (num_neutro) VALUES(" + neutro + ")";
-			st.executeUpdate(query);
-			JOptionPane.showMessageDialog(null, "Se ingresó correctamente el número neutro");
-
-		}
-
-		desconectar();
-
-	}
-
 	public void poblarBD(String num) throws SQLException {
 		int i = Integer.parseInt(num);
+		int[] edadesAleatorias = Utilidades.generarEdadesAleatorias(num);
+		int[] cedulasAleatorias = Utilidades.generarIdentificacionesAleatorios(num);
+		String[] nombresAleatorios = Utilidades.generarNombresAleatorios(num);
 		Statement poblar = conexion.createStatement();
 
-		Random rnd = new Random();
-		for (int k = 1; k <= i; k++) {
-			int numRamdon = rnd.nextInt();
-			if (numRamdon > 0) {
-				String queryPositivos = "INSERT INTO positivos (num_positivos) VALUES(" + numRamdon + ")";
-				poblar.executeUpdate(queryPositivos);
-			} else {
-				String queryNegativos = "INSERT INTO negativos (num_negativos) VALUES(" + numRamdon + ")";
-				poblar.executeUpdate(queryNegativos);
+		for (int k = 0; k < i; k++) {
 
-			}
+			String queryPositivos = "INSERT INTO `personas`(`CEDULA`, `NOMBRE`, `EDAD`) VALUES (" + cedulasAleatorias[k]
+					+ ",'" + nombresAleatorios[k] + "'," + edadesAleatorias[k] + ")";
+			System.out.println(queryPositivos);
+			poblar.executeUpdate(queryPositivos);
 
 		}
-
-		JOptionPane.showMessageDialog(null, "Se pobló correctamente la BD");
 		desconectar();
+		JOptionPane.showMessageDialog(null, "Se pobló correctamente la BD");
+
 	}
 
 	public void agregarDato(String dato) throws SQLException {
@@ -117,6 +91,15 @@ public class ConexionBD {
 		}
 
 		JOptionPane.showMessageDialog(null, "Se borró correctamente el dato");
+		desconectar();
+	}
+
+	public void ejecutarQueryCreacion(int cedula, String nombre, int edad) throws SQLException {
+		Statement poblar = conexion.createStatement();
+		String queryPositivos = "INSERT INTO `personas`(`CEDULA`, `NOMBRE`, `EDAD`) VALUES (" + cedula + ",'" + nombre
+				+ "'," + edad + ")";
+		System.out.println(queryPositivos);
+		poblar.executeUpdate(queryPositivos);
 		desconectar();
 	}
 
