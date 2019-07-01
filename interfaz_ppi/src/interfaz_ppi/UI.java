@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -13,16 +12,20 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import arbolAVL.Arbol;
+import arbolAVL.Nodo;
 import util.ConexionBD;
 
 public class UI extends JFrame implements ActionListener {
 	JMenuBar barra;
-	JMenu menuInteracciones, menuRecorridos;
-	JMenuItem registrarUsuario, eliminarUsuario, poblarBD, exportar, inorden, postorden, preorden;
+	JMenu menuInteracciones, menuRecorridos, menuCrearArbol;
+	JMenuItem registrarUsuario, eliminarUsuario, poblarBD, exportar, inorden, postorden, preorden, crearArbol;
 
 	JTextArea resultado;
 	JTextField valor1, valor2;
 	public static String sumando, restando, dividiendo, multiplicando;
+
+	Arbol arbol;
 
 	public UI() {
 		setLayout(null);
@@ -34,6 +37,9 @@ public class UI extends JFrame implements ActionListener {
 
 		menuRecorridos = new JMenu("RECORRIDOS");
 		barra.add(menuRecorridos);
+
+		menuCrearArbol = new JMenu("CREAR ARBOL");
+		barra.add(menuCrearArbol);
 
 		registrarUsuario = new JMenuItem("Ingresar");
 		registrarUsuario.addActionListener(this);
@@ -62,6 +68,10 @@ public class UI extends JFrame implements ActionListener {
 		exportar = new JMenuItem("Exportar");
 		exportar.addActionListener(this);
 		menuRecorridos.add(exportar);
+
+		crearArbol = new JMenuItem("crear arbol");
+		crearArbol.addActionListener(this);
+		menuCrearArbol.add(crearArbol);
 
 		resultado = new JTextArea("Resultados");
 		resultado.setBounds(110, 30, 500, 350);
@@ -129,10 +139,19 @@ public class UI extends JFrame implements ActionListener {
 		}
 		if (e.getSource() == preorden) {
 			resultado.setText("El resultado del recorrido preorden fue: ");
+			
+			ConexionBD preOrden = new ConexionBD();
+			preOrden.preOrdenConCedulas();
+
 		}
 		if (e.getSource() == exportar) {
 			// ACA VA EL METODO PARA EXPORTAR
 
+		}
+
+		if (e.getSource() == crearArbol) {
+			ConexionBD crearArbol = new ConexionBD();
+			crearArbol.crearArbolConCedulas();
 		}
 
 	}

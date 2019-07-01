@@ -5,8 +5,14 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale.Category;
 
 import javax.swing.JOptionPane;
+
+import arbolAVL.Arbol;
+import arbolAVL.Nodo;
 
 public class ConexionBD {
 
@@ -87,6 +93,69 @@ public class ConexionBD {
 
 		JOptionPane.showMessageDialog(null, "Se borró correctamente el dato");
 		desconectar();
+	}
+
+	
+	public void crearArbolConCedulas() {
+		String sqlResto = "SELECT * FROM personas";
+		int cedula;
+		String strNombre;
+		int edad;
+		Arbol arbol = null;
+		try (Statement st = conexion.createStatement();) {
+			// hace la consulta
+			ResultSet rs = st.executeQuery(sqlResto);
+			while (rs.next()) {
+				cedula = rs.getInt(1);
+				strNombre = rs.getString(2);
+				edad = rs.getInt(3);
+				Nodo nodo = new Nodo(cedula, strNombre, edad);
+				arbol = new Arbol(cedula, strNombre, edad);
+				arbol.addNodo(nodo);
+
+				System.out.println(nodo.getCedula());
+			}
+
+		} catch (SQLException e) {
+			// hacer algo con la excepcion
+		}
+		desconectar();
+
+		
+
+	}
+	
+	public void preOrdenConCedulas() {
+		String sqlResto = "SELECT * FROM personas";
+		int cedula;
+		String strNombre;
+		int edad;
+		Nodo nodo = null;
+		Arbol arbol = null;
+		try (Statement st = conexion.createStatement();) {
+			// hace la consulta
+			ResultSet rs = st.executeQuery(sqlResto);
+			while (rs.next()) {
+				cedula = rs.getInt(1);
+				strNombre = rs.getString(2);
+				edad = rs.getInt(3);
+				nodo = new Nodo(cedula, strNombre, edad);
+				arbol = new Arbol(cedula, strNombre, edad);
+				arbol.addNodo(nodo);
+				arbol.preOrden(nodo);
+				
+				
+			}
+			
+			
+
+		} catch (SQLException e) {
+			// hacer algo con la excepcion
+		}
+		desconectar();
+
+		
+
 	}
 
 }
