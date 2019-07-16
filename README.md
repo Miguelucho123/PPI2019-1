@@ -39,8 +39,7 @@ _Para instalar la BD se importa desde el phpmyadmin, esta página se configura d
 
 
 * **Miguel Ángel Gutiérrez Echeverri** 
-* **Estefanía Congote**
-* **Sebastían Arismendy**
+
 
 ## Expresiones de Gratitud 🎁
 
