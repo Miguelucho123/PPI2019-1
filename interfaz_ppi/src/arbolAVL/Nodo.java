@@ -7,16 +7,19 @@ public class Nodo {
 	private int edad;
 	private int cedula;
 
-	private Nodo padre;
 	private Nodo hojaIzquierda;
 	private Nodo hojaDerecha;
 
 	/* Constructor */
-	public Nodo(int cedula, String nombre, int edad) {
+	public Nodo(int cedula, Nodo hojaIzquierda, Nodo hojaDerecha) {
 		this.cedula = cedula;
-		this.nombre = nombre;
-		this.edad = edad;
+
+		this.hojaIzquierda = hojaIzquierda;
+		this.hojaDerecha = hojaDerecha;
+
 	}
+
+
 
 	/* Setters y Getters */
 	public String getNombre() {
@@ -41,14 +44,6 @@ public class Nodo {
 
 	public void setCedula(int cedula) {
 		this.cedula = cedula;
-	}
-
-	public Nodo getPadre() {
-		return padre;
-	}
-
-	public void setPadre(Nodo padre) {
-		this.padre = padre;
 	}
 
 	public Nodo getHojaIzquierda() {

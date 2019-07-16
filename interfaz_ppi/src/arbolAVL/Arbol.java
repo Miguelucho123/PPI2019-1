@@ -1,17 +1,15 @@
 package arbolAVL;
 
+import java.util.ArrayList;
+
 public class Arbol {
 	/* Atributos */
 
 	private Nodo raiz;
 
 	/* Contructories */
-	public Arbol(int cedula, String nombre, int edad) {
-		this.raiz = new Nodo(cedula, nombre, edad);
-	}
-
-	public Arbol(Nodo raiz) {
-		this.raiz = raiz;
+	public Arbol() {
+		this.raiz = null;
 	}
 
 	/* Setters y Getters */
@@ -23,54 +21,73 @@ public class Arbol {
 		this.raiz = raiz;
 	}
 
-	private void addNodo(Nodo nodo, Nodo raiz) {
-		/* 2.- Partiendo de la raíz preguntamos: Nodo == null ( o no existe ) ? */
-		if (raiz == null) {
-			/*
-			 * 3.- En caso afirmativo X pasa a ocupar el lugar del nodo y ya hemos ingresado
-			 * nuestro primer dato. ==== EDITO ===== Muchas gracias a @Espectro por la
-			 * corrección de esta línea
-			 */
-			this.setRaiz(nodo);
+	public boolean agregar(int cedula) {
+		Nodo nuevo = new Nodo(cedula, null, null);
+		insertar(nuevo, raiz);
+		return true;
+	}
+
+	public void insertar(Nodo nuevo, Nodo pivote) {
+		if (this.raiz == null) {
+			raiz = nuevo;
 		} else {
-			/* 4.- En caso negativo preguntamos: X < Nodo */
-			if (nodo.getEdad() <= raiz.getEdad()) {
-				/*
-				 * 5.- En caso de ser menor pasamos al Nodo de la IZQUIERDA del que acabamos de
-				 * preguntar y repetimos desde el paso 2 partiendo del Nodo al que acabamos de
-				 * visitar
-				 */
-				if (raiz.getHojaIzquierda() == null) {
-					raiz.setHojaIzquierda(nodo);
+			if (nuevo.getCedula() <= pivote.getCedula()) {
+				if (pivote.getHojaIzquierda() == null) {
+					pivote.setHojaIzquierda(nuevo);
 				} else {
-					addNodo(nodo, raiz.getHojaIzquierda());
+					insertar(nuevo, pivote.getHojaIzquierda());
 				}
 			} else {
-				/*
-				 * 6.- En caso de ser mayor pasamos al Nodo de la DERECHA y tal cual hicimos con
-				 * el caso anterior repetimos desde el paso 2 partiendo de este nuevo Nodo.
-				 */
-				if (raiz.getHojaDerecha() == null) {
-					raiz.setHojaDerecha(nodo);
+				if (pivote.getHojaDerecha() == null) {
+					pivote.setHojaDerecha(nuevo);
 				} else {
-					addNodo(nodo, raiz.getHojaDerecha());
+					insertar(nuevo, pivote.getHojaDerecha());
 				}
 			}
 		}
+
 	}
 
-	public void addNodo(Nodo nodo) {
-		this.addNodo(nodo, this.raiz);
+ 	public ArrayList preOrden() {
+		ArrayList l = new ArrayList();
+		preOrden(raiz, l);
+		return l;
 	}
 
-	public void preOrden(Nodo nodo) {
-		
-		if (nodo != null) {
-			System.out.println(nodo.getEdad());
-			preOrden(nodo.getHojaIzquierda());
-			preOrden(nodo.getHojaDerecha());
+	private void preOrden(Nodo reco, ArrayList l) {
+		if (reco != null) {
+			l.add(reco.getCedula() + " ");
+			preOrden(reco.getHojaIzquierda(), l);
+			preOrden(reco.getHojaDerecha(), l);
 		}
-		
+	}
+
+	public ArrayList inOrden() {
+		ArrayList l = new ArrayList();
+		inOrden(raiz, l);
+		return l;
+	}
+
+	private void inOrden(Nodo reco, ArrayList l) {
+		if (reco != null) {
+			inOrden(reco.getHojaIzquierda(), l);
+			l.add(reco.getCedula() + " ");
+			inOrden(reco.getHojaDerecha(), l);
+		}
+	}
+
+	public ArrayList postOrden() {
+		ArrayList l = new ArrayList();
+		postOrden(raiz, l);
+		return l;
+	}
+
+	private void postOrden(Nodo reco, ArrayList l) {
+		if (reco != null) {
+			postOrden(reco.getHojaIzquierda(), l);
+			postOrden(reco.getHojaDerecha(), l);
+			l.add(reco.getCedula() + " ");
+		}
 	}
 
 }

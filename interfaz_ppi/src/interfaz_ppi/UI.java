@@ -2,6 +2,9 @@ package interfaz_ppi;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.SQLException;
 
 import javax.swing.JFrame;
@@ -12,8 +15,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import arbolAVL.Arbol;
-import arbolAVL.Nodo;
 import util.ConexionBD;
 
 public class UI extends JFrame implements ActionListener {
@@ -23,9 +24,6 @@ public class UI extends JFrame implements ActionListener {
 
 	JTextArea resultado;
 	JTextField valor1, valor2;
-	public static String sumando, restando, dividiendo, multiplicando;
-
-	Arbol arbol;
 
 	public UI() {
 		setLayout(null);
@@ -129,23 +127,43 @@ public class UI extends JFrame implements ActionListener {
 
 		}
 		if (e.getSource() == inorden) {
-			// ACA VA METODO DE INORDEN
 
-			resultado.setText("El resultado del recorrido inorden fue: ");
+			ConexionBD inOrden = new ConexionBD();
+			System.out.println(inOrden.inOrdenConCedulas());
+			resultado.setText("El resultado del recorrido inorden fue: " + inOrden.inOrdenConCedulas());
+			inOrden.desconectar();
 		}
 		if (e.getSource() == postorden) {
-			// ACA VA METODO POSTORDEN
-			resultado.setText("El resultado del recorrido postorden fue: ");
+			ConexionBD posOrden = new ConexionBD();
+			resultado.setText("El resultado del recorrido postorden fue: " + posOrden.posOrdenConCedulas());
+			posOrden.desconectar();
 		}
 		if (e.getSource() == preorden) {
-			resultado.setText("El resultado del recorrido preorden fue: ");
-			
+
 			ConexionBD preOrden = new ConexionBD();
 			preOrden.preOrdenConCedulas();
+			resultado.setText("El resultado del recorrido preorden fue: " + preOrden.preOrdenConCedulas());
+			preOrden.desconectar();
 
 		}
 		if (e.getSource() == exportar) {
-			// ACA VA EL METODO PARA EXPORTAR
+			String texto = resultado.getText();
+			System.out.println(texto);
+			try {
+				String ruta = "src/ResultadoExportar//archivoResultados.txt";
+		        File archivo = new File(ruta);
+		        BufferedWriter bw;
+		        if(archivo.exists()) {
+		            bw = new BufferedWriter(new FileWriter(archivo));
+		            bw.write(texto);
+		        } else {
+		            bw = new BufferedWriter(new FileWriter(archivo));
+		            bw.write(texto);
+		        }
+		        bw.close();
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
 
 		}
 

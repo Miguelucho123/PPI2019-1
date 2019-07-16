@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 
 import arbolAVL.Arbol;
 import arbolAVL.Nodo;
+import arbolAVL.SimuladorArbol;
 
 public class ConexionBD {
 
@@ -23,6 +24,7 @@ public class ConexionBD {
 	private static final String url = "jdbc:mysql://localhost:3306/personalbd";
 	private ResultSet rs;
 	private Statement st;
+	SimuladorArbol simulador = new SimuladorArbol();
 
 	public ConexionBD() {
 		conexion = null;
@@ -95,67 +97,92 @@ public class ConexionBD {
 		desconectar();
 	}
 
-	
 	public void crearArbolConCedulas() {
-		String sqlResto = "SELECT * FROM personas";
+		String sqlResto = "SELECT * FROM personas ORDER by EDAD DESC";
 		int cedula;
-		String strNombre;
-		int edad;
-		Arbol arbol = null;
-		try (Statement st = conexion.createStatement();) {
+
+		try (Statement st = conexion.createStatement()) {
 			// hace la consulta
 			ResultSet rs = st.executeQuery(sqlResto);
 			while (rs.next()) {
 				cedula = rs.getInt(1);
-				strNombre = rs.getString(2);
-				edad = rs.getInt(3);
-				Nodo nodo = new Nodo(cedula, strNombre, edad);
-				arbol = new Arbol(cedula, strNombre, edad);
-				arbol.addNodo(nodo);
-
-				System.out.println(nodo.getCedula());
+				if (this.simulador.insertar(cedula)) {
+					System.out.println("se agregó el arbol correctamente" + cedula);
+				}
 			}
 
 		} catch (SQLException e) {
 			// hacer algo con la excepcion
 		}
 		desconectar();
-
-		
 
 	}
-	
-	public void preOrdenConCedulas() {
-		String sqlResto = "SELECT * FROM personas";
+
+	public String preOrdenConCedulas() {
+		String sqlResto = "SELECT * FROM personas ORDER by EDAD DESC";
 		int cedula;
-		String strNombre;
-		int edad;
-		Nodo nodo = null;
-		Arbol arbol = null;
-		try (Statement st = conexion.createStatement();) {
+		SimuladorArbol arboljr = new SimuladorArbol();
+
+		try (Statement st = conexion.createStatement()) {
 			// hace la consulta
 			ResultSet rs = st.executeQuery(sqlResto);
 			while (rs.next()) {
 				cedula = rs.getInt(1);
-				strNombre = rs.getString(2);
-				edad = rs.getInt(3);
-				nodo = new Nodo(cedula, strNombre, edad);
-				arbol = new Arbol(cedula, strNombre, edad);
-				arbol.addNodo(nodo);
-				arbol.preOrden(nodo);
-				
-				
+				if (arboljr.insertar(cedula)) {
+					//System.out.println("se agregó el arbol correctamente" + cedula);
+				}
 			}
-			
-			
+
+		} catch (SQLException e) {
+			e.getCause();
+		}
+
+		return arboljr.preOrden();
+
+	}
+
+	public String inOrdenConCedulas() {
+		String sqlResto = "SELECT * FROM personas ORDER by EDAD DESC";
+		int cedula;
+		SimuladorArbol arboljr = new SimuladorArbol();
+
+		try (Statement st = conexion.createStatement()) {
+			// hace la consulta
+			ResultSet rs = st.executeQuery(sqlResto);
+			while (rs.next()) {
+				cedula = rs.getInt(1);
+				if (arboljr.insertar(cedula)) {
+					// System.out.println("se agregó el arbol correctamente" + cedula);
+				}
+			}
 
 		} catch (SQLException e) {
 			// hacer algo con la excepcion
 		}
-		desconectar();
 
-		
+		return arboljr.inOrden();
+	}
 
+	public String posOrdenConCedulas() {
+		String sqlResto = "SELECT * FROM personas ORDER by EDAD DESC";
+		int cedula;
+		SimuladorArbol arboljr = new SimuladorArbol();
+
+		try (Statement st = conexion.createStatement()) {
+			// hace la consulta
+			ResultSet rs = st.executeQuery(sqlResto);
+			while (rs.next()) {
+				cedula = rs.getInt(1);
+				if (arboljr.insertar(cedula)) {
+					// System.out.println("se agregó el arbol correctamente" + cedula);
+				}
+			}
+
+		} catch (SQLException e) {
+
+		}
+
+		return arboljr.posOrden();
 	}
 
 }
