@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-06-2019 a las 17:10:04
+-- Tiempo de generación: 17-07-2019 a las 00:01:33
 -- Versión del servidor: 10.1.40-MariaDB
 -- Versión de PHP: 7.3.5
 
@@ -33,6 +33,18 @@ CREATE TABLE `personas` (
   `NOMBRE` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `EDAD` bigint(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `personas`
+--
+
+INSERT INTO `personas` (`CEDULA`, `NOMBRE`, `EDAD`) VALUES
+(12, 'sde', 13),
+(2019061083, 'Baruc Cardiel', 27),
+(2019061948, 'Baldwin Cariaga', 31),
+(2019064888, 'Baldomero Gomez', 29),
+(2019068383, 'Baruc Carillo', 39),
+(2019069439, 'Candelaria Grasia', 39);
 
 --
 -- Índices para tablas volcadas
